@@ -27,23 +27,26 @@ public final class App {
         }
         
         final String inputFileName  = args[0];
-        final String outputFileName = inputFileName + COMPRESSED_FILE_EXTENSION;
-        
         final File inputFile = new File(inputFileName);
         
         if (!inputFile.exists()) {
-            System.err.printf("Input file '%s' does not exist.", inputFileName);
+            System.err.printf(
+                    "Input file '%s' does not exist.\n", 
+                    inputFileName);
+            
             System.exit(1);
         }
         
+        if (inputFileName.endsWith(COMPRESSED_FILE_EXTENSION)) {
+            System.err.printf(
+                    "Input file '%s' already seems to  be compressed.\n", 
+                    inputFileName);
+            
+            System.exit(1);
+        }
+        
+        final String outputFileName = inputFileName + COMPRESSED_FILE_EXTENSION;
         final File outputFile = new File(outputFileName);
-        
-//        if (outputFile.exists()) {
-//            System.err.printf("Output file '%s' already exists.", 
-//                              outputFileName);
-//            System.exit(1);
-//        }
-        
         final Path inputPath  = inputFile .toPath();
         final Path outputPath = outputFile.toPath();
         

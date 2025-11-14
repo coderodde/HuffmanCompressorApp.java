@@ -1,5 +1,6 @@
 package io.github.coderodde.encoding;
 
+import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.Objects;
 
@@ -65,19 +66,19 @@ public final class HuffmanByteCompressor {
         System.out.println("code");
         System.out.println(code);
         
-        final long countNumberOfBitsInRawData = countBitsInRawData(code, 
-                                                                   rawData);
+        final long countNumberOfBytesInRawData = countBitsInRawData(code, 
+                                                                    rawData);
         
-        final int countNumberOfBitsInCodeHeader = countBytesInCodeHeader(code);
+        final int countNumberOfBytesInCodeHeader = countBytesInCodeHeader(code);
         
-        final byte[] outputData = new byte[(int)(countNumberOfBitsInCodeHeader + 
-                                                 countNumberOfBitsInRawData)];
+        final byte[] outputData = new byte[(int)(countNumberOfBytesInCodeHeader + 
+                                                 countNumberOfBytesInRawData)];
         
         fillHeader(code, outputData);
         fillRawData(code, 
                     outputData,
                     rawData,
-                    countNumberOfBitsInCodeHeader);
+                    countNumberOfBytesInCodeHeader);
         
         return outputData;
     }
@@ -85,7 +86,19 @@ public final class HuffmanByteCompressor {
     private static void fillHeader(final HuffmanCodeTable<Byte> code,
                                    final byte[] outputData) {
         
-        int currentByteIndex = 0;
+        // Fill the code size at the very first 32-bit integer:
+        final byte[] codeSizeBytes = 
+                ByteBuffer.allocate(BYTES_PER_CODE_SIZE)
+                          .putInt(code.size())
+                          .array();
+        
+        System.arraycopy(codeSizeBytes, 
+                         0,
+                         outputData,
+                         0, 
+                         codeSizeBytes.length);
+        
+        int currentByteIndex = BYTES_PER_CODE_SIZE;
         
         for (final Map.Entry<Byte, CodeWord> entry : code) {
             outputData[currentByteIndex++] = entry.getKey();
@@ -164,10 +177,10 @@ public final class HuffmanByteCompressor {
     
     private static int
         countBytesInCodeHeader(final HuffmanCodeTable<Byte> code) {
-        return code.size() * (BYTES_PER_BYTE_DESCRIPTOR + 
-                              BYTES_PER_CODEWORD_LENGTH +
-                              BYTES_PER_CODEWORD_MAX)
-                
-                            + BYTES_PER_CODEWORD_LENGTH;
+        final int codeEntryLength = BYTES_PER_BYTE_DESCRIPTOR + 
+                                    BYTES_PER_CODEWORD_LENGTH +
+                                    BYTES_PER_CODEWORD_MAX;
+        
+        return (code.size() * codeEntryLength) + BYTES_PER_CODE_SIZE;
     }
 }
