@@ -53,6 +53,35 @@ public class CodeWord {
     }
     
     @Override
+    public boolean equals(final Object object) {
+        if (object == this) {
+            return true;
+        }
+        
+        if (object == null) {
+            return false;
+        }
+    
+        if (!getClass().equals(object.getClass())) {
+            return false;
+        }
+        
+        final CodeWord other = (CodeWord) object;
+        
+        if (length() != other.length()) {
+            return false;
+        }
+        
+        for (int i = 0; i < length(); ++i) {
+            if (get(i) != other.get(i)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder(length);
         

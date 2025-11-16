@@ -81,7 +81,21 @@ public final class HuffmanCodeTable<S>
         
         final HuffmanCodeTable<S> other = (HuffmanCodeTable<S>) object;
         
-        return symbolToCodeWordMap.equals(other.symbolToCodeWordMap);
+        if (size() != other.size()) {
+            return false;
+        }
+        
+        for (final Map.Entry<S, CodeWord> entry : this) {
+            final S symbol = entry.getKey();
+            final CodeWord codeword = entry.getValue();
+            final CodeWord codewordFromOther = other.getCodeword(symbol);
+            
+            if (!codeword.equals(codewordFromOther)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     @Override

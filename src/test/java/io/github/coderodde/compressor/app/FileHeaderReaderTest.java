@@ -1,21 +1,24 @@
 package io.github.coderodde.compressor.app;
 
+import java.util.Arrays;
 import java.util.Random;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
-public final class FileHeaderReaderTest {
+public final class FileHeaderReaderTest {   
     
     private static final int SEED = 13;
-    private static final int MAXIMUM_BYTE_ARRAY_LENGTH = 10;
+    private static final int MAXIMUM_BYTE_ARRAY_LENGTH = 2_000;
     private static final int STRESS_TEST_ITERATIONS = 50;
     private static final Random RANDOM = new Random(SEED);
     
-    private static final byte[] COMPRESSED_DATA = new byte[1024];
+    private static final byte[] COMPRESSED_DATA = new byte[10_000];
+    
+    @Before
+    public void clearCompressedData() {
+        Arrays.fill(COMPRESSED_DATA, (byte) 0);
+    }
     
     @Test
     public void smallTest() {
@@ -42,10 +45,11 @@ public final class FileHeaderReaderTest {
         assertEquals(expectedCodeTable, resultCodeTable);
     }
     
-//    @Test
+    @Test
     public void stressTest() {
         for (int i = 0; i < STRESS_TEST_ITERATIONS; ++i) {
-            System.out.println("Stress test iteration: i = " + i);
+            // Clear the output buffer in order to get rid of junk:
+            Arrays.fill(COMPRESSED_DATA, (byte) 0);
             
             final byte[] rawData = getRawData();
             

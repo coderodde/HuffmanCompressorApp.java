@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.util.Objects;
 import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_RAW_DATA_LENGTH;
 import java.nio.ByteOrder;
+import java.util.Arrays;
 
 /**
  * This class implements the reader returning the file header data such as the 
@@ -100,10 +101,11 @@ public final class FileHeaderReader {
         final byte value  = compressedData[byteCursor];
         final byte length = compressedData[byteCursor + 1];
         final byte[] codeEntryData = 
-                ByteBuffer.wrap(compressedData,
-                                byteCursor + 2,
-                                BYTES_PER_CODEWORD_MAX)
-                          .array();
+                Arrays.copyOfRange(compressedData, 
+                                   byteCursor + 2, 
+                                   byteCursor + 2 + BYTES_PER_CODEWORD_MAX);
+        
+//        reverseBytes(codeEntryData);
         
         final CodeWord codeword = inferCodeWord(length, codeEntryData);
         
@@ -112,7 +114,10 @@ public final class FileHeaderReader {
     
     private static CodeWord inferCodeWord(final int length,
                                           final byte[] codeData) {
-        final int bits = ByteBuffer.wrap(codeData).getInt();
+        final int bits = ByteBuffer.wrap(codeData)
+                                   .order(ByteOrder.LITTLE_ENDIAN)
+                                   .getInt();
+        
         final CodeWord codeword = new CodeWord(length);
         
         int mask = 1;
@@ -127,4 +132,12 @@ public final class FileHeaderReader {
         
         return codeword;
     }
+    
+//    private static void reverseBytes(final byte[] array) {
+//        for (int i = 0, j = array.length - 1; i < j; ++i, --j) {
+//            final byte tmp = array[i];
+//            array[i] = array[j];
+//            array[j] = tmp;
+//        }
+//    }
 }
