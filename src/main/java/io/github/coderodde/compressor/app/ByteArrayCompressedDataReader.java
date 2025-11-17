@@ -44,7 +44,8 @@ public final class ByteArrayCompressedDataReader {
     public ByteArrayCompressedDataReader(final byte[] outputRawData,
                                          final byte[] inputCompressedData,
                                          final int startingBitIndex,
-                                         final HuffmanDecodingTree<Byte> decoderTree) {
+                                         final HuffmanDecodingTree<Byte> 
+                                                 decoderTree) {
         
         this.outputRawData = 
                 Objects.requireNonNull(

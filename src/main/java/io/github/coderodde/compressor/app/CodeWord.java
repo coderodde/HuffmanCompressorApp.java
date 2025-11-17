@@ -21,6 +21,18 @@ public class CodeWord {
         this.bits = new BitSet(length);
     }
     
+    public CodeWord reverse() {
+        final CodeWord reversed = new CodeWord(length);
+        
+        for (int i = length - 1, j = 0; i >= 0; --i, ++j) {
+            if (get(i)) {
+                reversed.set(j);
+            }
+        }
+        
+        return reversed;
+    }
+    
     public byte[] toByteArray() {
         return bits.toByteArray();
     }

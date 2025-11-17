@@ -92,10 +92,12 @@ public final class HuffmanDecodingTree<S> {
      * @param symbol   the symbol to insert.
      * @param codeword the codeword associated with the input symbol.
      */
-    private void insert(final S symbol, final CodeWord codeword) {
+    private void insert(final S symbol, CodeWord codeword) {
+//        codeword = codeword.reverse();
+        
         TreeNode<S> node = root;
         
-        for (int i = 0; i < codeword.length(); ++i) {
+        for (int i = codeword.length() - 1; i >= 0; --i) {
             final boolean bit = codeword.get(i);
             
             if (bit) { 

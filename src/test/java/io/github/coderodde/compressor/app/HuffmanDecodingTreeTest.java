@@ -1,5 +1,6 @@
 package io.github.coderodde.compressor.app;
 
+import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -38,6 +39,6 @@ public class HuffmanDecodingTreeTest {
         
         reader.read();
         
-        assertEquals(sourceData, decompressedData);
+        assertTrue(Arrays.equals(sourceData, decompressedData));
     }
 }
