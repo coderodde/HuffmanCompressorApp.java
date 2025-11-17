@@ -52,20 +52,20 @@ public final class HuffmanDecodingTree<S> {
     /**
      * Decodes a codeword to a symbol.
      * 
-     * @param rawData       the raw data for decompression.
-     * @param bitIndex the index of the starting bit of a codeword to scan.
+     * @param compressedData the compressed data for decompression.
+     * @param bitIndex       the index of the starting bit of a codeword to 
+     *                       scan.
      * @return the encoded symbol.
      */
-    public S decode(final byte[] rawData, int bitIndex) {
-        Objects.requireNonNull(rawData, "The input raw data is null");
-        Objects.requireNonNull(rawData, "The input start index is null");
+    public S decode(final byte[] compressedData, int bitIndex) {
+        Objects.requireNonNull(compressedData, "The input raw data is null");
         
         previousCodeLength = 0;
         
         TreeNode<S> node = root;
         
         while (node.symbol == null) {
-            final boolean bit = readBit(rawData, bitIndex);
+            final boolean bit = readBit(compressedData, bitIndex);
             node = (bit ? node.oneChild : node.zeroChild);
             ++bitIndex;
             ++previousCodeLength;
