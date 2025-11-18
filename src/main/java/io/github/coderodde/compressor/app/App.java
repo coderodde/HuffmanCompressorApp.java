@@ -50,7 +50,7 @@ public final class App {
         
         System.out.printf(
                 String.format(
-                        "Usage: %s FILE.huf OUTPUT_FILE - " + 
+                        "       %s FILE.huf OUTPUT_FILE - " + 
                         "to decompress FILE.huf into OUTPUT_FILE\n", 
                         jarName));
     }
@@ -89,23 +89,15 @@ public final class App {
         final File compressedFile = new File(compressedFileName);
         final File outputFile = new File(outputFileName);
         
-        boolean errored = false;
-        
         if (!compressedFile.exists()) {
-            errored = true;
             error(String.format("Compressed file '%s' does not exist.\n", 
                                 compressedFileName));
+            
+            System.exit(EXIT_FAILURE);
         }
         
         if (!outputFile.exists()) {
-            errored = true;
-            error(String.format("Output file '%s' does not exist.\n", 
-                                outputFileName));
-            
-        }
-        
-        if (errored) {
-            System.exit(EXIT_FAILURE);
+            outputFile.createNewFile();
         }
         
         final Path compressedFilePath = compressedFile.toPath();

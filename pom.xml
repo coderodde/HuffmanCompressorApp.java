@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>io.github.coderodde.encoding.App</exec.mainClass>
+        <exec.mainClass>io.github.coderodde.compressor.app.App</exec.mainClass>
     </properties>
     <name>HuffmanCompressorApp.java</name>
     <build>
@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.github.coderodde.encoding.App</mainClass>
+                            <mainClass>io.github.coderodde.compressor.app.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
