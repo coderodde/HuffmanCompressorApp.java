@@ -17,29 +17,28 @@ import java.nio.ByteBuffer;
  */
 public final class HuffmanByteDecompressor {
 
-    public static byte[] decompress(final byte[] rawData) {
-        final HuffmanCodeTable<Byte> codeTable = inferCodeTable(rawData);
+    public static byte[] decompress(final byte[] compressedData) {
+        final ByteArrayHeaderReader headerReader = 
+                new ByteArrayHeaderReader(compressedData);
         
-        final HuffmanDecoderTree<Byte> decodingTree = 
+        final int rawDataLength = headerReader.getRawDataLength();
+        final byte[] rawData = new byte[rawDataLength];
+        
+        final HuffmanCodeTable<Byte> codeTable = headerReader.getCodeTable();
+        final HuffmanDecoderTree<Byte> decoder = 
                 new HuffmanDecoderTree<>(codeTable);
         
-        final int headerSize = getHeaderSize(rawData);
+        final int startingBitIndex = 
+                Utils.countBytesInCodeHeader(codeTable.size()) * Byte.SIZE;
         
-        return decompressImpl(decodingTree, 
-                              rawData,
-                              headerSize);
-    }
-    
-    private static byte[] 
-        decompressImpl(final HuffmanDecoderTree<Byte> decodingTree,
-                       final byte[] rawData,
-                       final int headerSize) {
-            
-        final byte[] output = new byte[rawData.length - headerSize];
+        final ByteArrayCompressedDataReader dataReader = 
+                new ByteArrayCompressedDataReader(rawData, 
+                                                  compressedData, 
+                                                  startingBitIndex,
+                                                  decoder);
         
-        int bitIndex = getHeaderSize(rawData) * Byte.SIZE;
-        
-        return output;
+        dataReader.read();
+        return rawData;
     }
     
     private static int getCodeSize(final byte[] rawData) {
@@ -75,67 +74,4 @@ public final class HuffmanByteDecompressor {
                BYTES_PER_RAW_DATA_LENGTH +
               (codeSize * codeEntrySize);
     }
-    
-    private static HuffmanCodeTable<Byte> inferCodeTable(final byte[] rawData) {
-        final int codeSize = getCodeSize(rawData);
-        final int codeEntrySize = BYTES_PER_BYTE_DESCRIPTOR + 
-                                  BYTES_PER_CODEWORD_LENGTH +
-                                  BYTES_PER_CODEWORD_MAX;
-        
-        
-        int byteCursor = codeSize;
-        final HuffmanCodeTable<Byte> codeTable = new HuffmanCodeTable<>();
-        
-        for (int i = 0; i < codeSize; ++i) {
-            loadCode(codeTable,
-                     rawData, 
-                     byteCursor);
-            
-            byteCursor += codeEntrySize;
-        }
-        
-        return codeTable;
-    }
-    
-    private static void loadCode(final HuffmanCodeTable<Byte> codeTable,
-                                 final byte[] rawData,
-                                 final int byteCursor) {
-        final byte value  = rawData[byteCursor];
-        final byte length = rawData[byteCursor + 1];
-        
-        final byte[] codeData = 
-                ByteBuffer.wrap(rawData, 
-                                byteCursor + 2,
-                                BYTES_PER_CODEWORD_MAX)
-                          .array();
-        
-        final CodeWord codeword = inferCodeword(length, codeData);
-        
-        codeTable.linkSymbolToCodeword(value, codeword);
-    }
-    
-    private static CodeWord inferCodeword(final int length, 
-                                          final byte[] codeData) {
-        
-        final int bits = ByteBuffer.wrap(codeData).getInt();
-        final CodeWord codeword = new CodeWord(length);
-        
-        int mask = 1;
-        
-        for (int i = 0; i < length; ++i) {
-            if ((bits & mask) != 0) {
-                codeword.set(i);
-            }
-            
-            mask <<= 1;
-        }
-        
-        return codeword;
-    }
-    
-//    private static HuffmanDecoderTree<Byte> 
-//        inferDecodingTree(final HuffmanCodeTable<Byte> codeTable) {
-//        return new HuffmanDecoderTree<>(codeTable);
-//        return HuffmanDecoderTree.
-//    }
 }
