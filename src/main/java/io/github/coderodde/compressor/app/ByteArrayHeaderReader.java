@@ -132,12 +132,4 @@ public final class ByteArrayHeaderReader {
         
         return codeword;
     }
-    
-//    private static void reverseBytes(final byte[] array) {
-//        for (int i = 0, j = array.length - 1; i < j; ++i, --j) {
-//            final byte tmp = array[i];
-//            array[i] = array[j];
-//            array[j] = tmp;
-//        }
-//    }
 }

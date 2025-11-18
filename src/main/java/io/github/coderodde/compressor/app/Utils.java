@@ -19,15 +19,15 @@ public final class Utils {
         
     }
     
-    public static int countBitsInRawData(final HuffmanCodeTable<Byte> code,
-                                         final byte[] rawData) {
-        int bits = 0;
+    public static long countBitsInRawData(final HuffmanCodeTable<Byte> code,
+                                          final byte[] rawData) {
+        long bits = 0;
         
         for (final byte b : rawData) {
             bits += code.getCodeword(b).length();
         }
         
-        return bits / Byte.SIZE + (bits % Byte.SIZE != 0 ? 1 : 0);
+        return bits / Byte.SIZE + (bits % Byte.SIZE != 0 ? 1L : 0L);
     }
     
     public static int getCodeEntryLength() {

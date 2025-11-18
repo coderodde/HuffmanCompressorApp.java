@@ -33,6 +33,12 @@ public final class ByteArrayHeaderWriter {
     private final byte[] outputData;
     
     /**
+     * The index of the bit in the compressed data byte array at which writing
+     * compressed data must begin.
+     */
+    private long dataStartBitIndex;
+    
+    /**
      * The code table to write to the compressed file header.
      */
     private final HuffmanCodeTable<Byte> codeTable;
@@ -55,6 +61,10 @@ public final class ByteArrayHeaderWriter {
         writeCodeSize();
         writeRawDataLength();
         writeCodeTable();
+    }
+    
+    public long getDataStartBitIndex() {
+        return dataStartBitIndex;
     }
     
     /**
@@ -114,6 +124,8 @@ public final class ByteArrayHeaderWriter {
             
             currentByteIndex += BYTES_PER_CODEWORD_MAX;
         }
+        
+        this.dataStartBitIndex = currentByteIndex;
     }
     
     private static void checkRawDataLength(final int rawDataLength) {

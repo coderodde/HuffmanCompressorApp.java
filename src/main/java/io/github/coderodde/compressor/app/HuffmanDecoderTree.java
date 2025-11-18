@@ -32,12 +32,7 @@ public final class HuffmanDecoderTree<S> {
     /**
      * Caches the code length of the previously decoded symbol.
      */
-    private int previousCodeLength = -1;
-    
-    /**
-     * Stores the read bits in order to reverse them.
-     */
-    private long tentativeBits = 0L;
+    private long previousCodeLength = -1L;
     
     /**
      * Constructs this Huffman decoding tree.
@@ -70,8 +65,11 @@ public final class HuffmanDecoderTree<S> {
         TreeNode<S> node = root;
         
         while (node.symbol == null) {
-            final boolean bit = readBit(compressedData, bitIndex);
-            node = (bit ? node.oneChild : node.zeroChild);
+            final boolean bit = readBit(compressedData,
+                                        bitIndex);
+            
+            node = bit ? node.oneChild : node.zeroChild;
+            
             ++bitIndex;
             ++previousCodeLength;
         }
@@ -79,7 +77,7 @@ public final class HuffmanDecoderTree<S> {
         return node.symbol;
     }
     
-    public int getPreviousCodeLength() {
+    public long getPreviousCodeLength() {
         return previousCodeLength;
     }
     

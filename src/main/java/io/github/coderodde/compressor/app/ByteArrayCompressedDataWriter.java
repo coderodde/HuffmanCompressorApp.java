@@ -27,7 +27,7 @@ public final class ByteArrayCompressedDataWriter {
      * The index of the first bit in the compressed data. We need this in order
      * to omit the compression header.
      */
-    private final int startingBitIndex;
+    private final long startingBitIndex;
     
     /**
      * The actual (Huffman) code table.
@@ -45,7 +45,7 @@ public final class ByteArrayCompressedDataWriter {
     public ByteArrayCompressedDataWriter(
             final byte[] compressedOutputData,
             final byte[] inputRawData,
-            final int startingBitIndex,
+            final long startingBitIndex,
             final HuffmanCodeTable<Byte> codeTable) {
         
         this.compressedOutputData = 
