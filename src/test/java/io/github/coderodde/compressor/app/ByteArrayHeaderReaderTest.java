@@ -32,7 +32,8 @@ public final class ByteArrayHeaderReaderTest {
         
         writer.write();
         
-        final ByteArrayHeaderReader reader = new ByteArrayHeaderReader(COMPRESSED_DATA);
+        final ByteArrayHeaderReader reader = 
+                new ByteArrayHeaderReader(COMPRESSED_DATA);
         
         final int resultRawDataLength = reader.getRawDataLength();
         final HuffmanCodeTable<Byte> resultCodeTable = reader.getCodeTable();

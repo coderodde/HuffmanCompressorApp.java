@@ -40,38 +40,4 @@ public final class HuffmanByteDecompressor {
         dataReader.read();
         return rawData;
     }
-    
-    private static int getCodeSize(final byte[] rawData) {
-        final byte[] sizeBytes = new byte[BYTES_PER_CODE_SIZE];
-        
-        System.arraycopy(rawData,
-                         0,
-                         sizeBytes, 
-                         0,
-                         sizeBytes.length);
-        
-        final ByteBuffer byteBuffer = ByteBuffer.wrap(sizeBytes);
-        final int codeSize = byteBuffer.getInt();
-        
-        System.out.println("code size: " + codeSize);
-        
-        return codeSize;
-    }
-    
-    /**
-     * Returns the size of the header in bytes.
-     * 
-     * @param rawData the raw data to decode.
-     * @return the size of the header in bytes.
-     */
-    private static int getHeaderSize(final byte[] rawData) {
-        final int codeSize = getCodeSize(rawData);
-        final int codeEntrySize = BYTES_PER_BYTE_DESCRIPTOR + 
-                                  BYTES_PER_CODEWORD_LENGTH +
-                                  BYTES_PER_CODEWORD_MAX;
-        
-        return BYTES_PER_CODE_SIZE + 
-               BYTES_PER_RAW_DATA_LENGTH +
-              (codeSize * codeEntrySize);
-    }
 }

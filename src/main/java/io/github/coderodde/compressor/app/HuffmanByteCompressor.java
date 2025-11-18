@@ -1,7 +1,5 @@
 package io.github.coderodde.compressor.app;
 
-import java.nio.ByteBuffer;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -46,7 +44,6 @@ public final class HuffmanByteCompressor {
      * Compresses the {@code rawData} {@code byte}-array using the input
      * {@code weightDistribution}.
      * 
-     * @param weightDistribution the weight distribution to use in compressing.
      * @param rawData            the raw data to compress.
      * 
      * @return the full binary {@code byte}-array containing all the data needed
