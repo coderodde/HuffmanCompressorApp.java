@@ -48,7 +48,7 @@ public final class ByteArrayHeaderReaderTest {
             // Clear the output buffer in order to get rid of junk:
             Arrays.fill(COMPRESSED_DATA, (byte) 0);
             
-            final byte[] rawData = Utils.getRawData();
+            final byte[] rawData = TestUtils.getRawData();
             
             final WeightDistribution<Byte> weightDistribution =
                     ByteWeightDistributionBuilder

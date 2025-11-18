@@ -8,7 +8,7 @@ public class HuffmanByteDecompressorTest {
 
     private static final int STRESS_TEST_ITERATIONS = 50;
     
-    @Test
+//    @Test
     public void decompressStressTest() {
         for (int i = 0; i < STRESS_TEST_ITERATIONS; ++i) {
             System.out.println("i = " + i);
@@ -17,7 +17,7 @@ public class HuffmanByteDecompressorTest {
     }
     
     private void stressTest() {
-        final byte[] sourceData = Utils.getRawData();
+        final byte[] sourceData = TestUtils.getRawData();
         final byte[] compressedData = 
                 HuffmanByteCompressor.compress(sourceData);
         

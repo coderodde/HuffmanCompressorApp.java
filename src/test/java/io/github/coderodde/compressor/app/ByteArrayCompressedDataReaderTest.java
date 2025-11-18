@@ -47,7 +47,7 @@ public class ByteArrayCompressedDataReaderTest {
         for (int i = 0; i < STRESS_TEST_ITERATIONS; ++i) {
             Arrays.fill(COMPRESSED_DATA, (byte) 0);
             
-            final byte[] rawData = Utils.getRawData();
+            final byte[] rawData = TestUtils.getRawData();
             
             // Write the compressed data:
             final WeightDistribution<Byte> wd = 

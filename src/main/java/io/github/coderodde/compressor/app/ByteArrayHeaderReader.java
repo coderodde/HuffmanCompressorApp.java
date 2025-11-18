@@ -105,8 +105,6 @@ public final class ByteArrayHeaderReader {
                                    byteCursor + 2, 
                                    byteCursor + 2 + BYTES_PER_CODEWORD_MAX);
         
-//        reverseBytes(codeEntryData);
-        
         final CodeWord codeword = inferCodeWord(length, codeEntryData);
         
         codeTable.linkSymbolToCodeword(value, codeword);

@@ -2,13 +2,13 @@ package io.github.coderodde.compressor.app;
 
 import java.util.Random;
 
-public class Utils {
+public class TestUtils {
     
     private static final int SEED = 13;
     private static final int MAXIMUM_BYTE_ARRAY_LENGTH = 2_000;
     private static final Random RANDOM = new Random(SEED);
     
-    private Utils() {
+    private TestUtils() {
         
     }
     
