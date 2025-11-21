@@ -1,4 +1,4 @@
-    package io.github.coderodde.compressor.app;
+package io.github.coderodde.compressor.app;
 
 import java.io.File;
 import java.io.IOException;

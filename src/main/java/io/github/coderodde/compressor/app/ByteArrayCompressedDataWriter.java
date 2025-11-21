@@ -73,7 +73,7 @@ public final class ByteArrayCompressedDataWriter {
         long currentBitIndex = startingBitIndex;
         
         for (final byte b : inputRawData) {
-            final CodeWord codeword = codeTable.get(b).reverse();
+            final CodeWord codeword  = codeTable.get(b).reverse();
             final int codewordLength = codeword.length();
             
             writeCodeWord(compressedOutputData,

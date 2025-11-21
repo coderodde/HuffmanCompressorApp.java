@@ -1,16 +1,16 @@
 package io.github.coderodde.compressor.app;
 
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_BYTE_DESCRIPTOR;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_CODEWORD_LENGTH;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_CODEWORD_MAX;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_CODE_SIZE;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_RAW_DATA_LENGTH;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_BYTE_DESCRIPTOR;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_CODEWORD_LENGTH;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_CODEWORD_MAX;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_CODE_SIZE;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_RAW_DATA_LENGTH;
 
 /**
  * This class contains some various helper methods.
  * 
  * @author Rodion "rodde" Efremov
- * @version 1.0.0 (Nov 16, 2025)
+ * @version 1.1.0 (Nov 21, 2025)
  * @since 1.0.0 (Nov 16, 2025)
  */
 public final class Utils {

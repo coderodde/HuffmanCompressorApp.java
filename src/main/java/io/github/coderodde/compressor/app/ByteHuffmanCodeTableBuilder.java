@@ -2,7 +2,6 @@ package io.github.coderodde.compressor.app;
 
 import static io.github.coderodde.compressor.app.Configuration.CODE_TABLE_CAPACITY;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;

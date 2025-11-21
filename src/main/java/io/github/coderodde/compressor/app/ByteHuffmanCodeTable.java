@@ -29,9 +29,6 @@ public final class ByteHuffmanCodeTable {
      * @param codeword the value codeword.
      */
     public void put(final byte value, final CodeWord codeword) {
-        if (table[Byte.toUnsignedInt(value)] != null) {
-            throw new IllegalStateException("yeah");
-        }
         table[Byte.toUnsignedInt(value)] = codeword;
         ++size;
     }

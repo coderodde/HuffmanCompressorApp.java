@@ -1,6 +1,5 @@
 package io.github.coderodde.compressor.app;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**

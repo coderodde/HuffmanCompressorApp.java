@@ -1,9 +1,9 @@
 package io.github.coderodde.compressor.app;
 
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_CODEWORD_MAX;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_CODE_SIZE;
+import static io.github.coderodde.compressor.app.Configuration.BYTES_PER_RAW_DATA_LENGTH;
 import static io.github.coderodde.compressor.app.Configuration.CODE_TABLE_CAPACITY;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_CODEWORD_MAX;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_CODE_SIZE;
-import static io.github.coderodde.compressor.app.HuffmanByteCompressor.BYTES_PER_RAW_DATA_LENGTH;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Objects;
