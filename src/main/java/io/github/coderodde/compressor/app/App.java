@@ -24,6 +24,10 @@ public final class App {
      */
     private static final String COMPRESSED_FILE_EXTENSION = ".huf";
 
+    private App() {
+        
+    }
+    
     public static void main(String[] args) {
         
         try {

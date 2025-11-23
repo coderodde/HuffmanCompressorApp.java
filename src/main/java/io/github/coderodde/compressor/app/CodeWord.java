@@ -70,12 +70,6 @@ public class CodeWord {
         bits |= mask;
     }
     
-    public void unset(final int index) {
-        checkIndex(index);
-        final long mask = ~(1L << index);
-        bits &= mask;
-    }
-    
     @Override
     public boolean equals(final Object object) {
         if (object == this) {

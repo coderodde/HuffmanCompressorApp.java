@@ -10,6 +10,10 @@ package io.github.coderodde.compressor.app;
  */
 public final class HuffmanByteDecompressor {
 
+    private HuffmanByteDecompressor() {
+        
+    }
+    
     public static byte[] decompress(final byte[] compressedData) {
         final ByteArrayHeaderReader headerReader = 
                 new ByteArrayHeaderReader(compressedData);

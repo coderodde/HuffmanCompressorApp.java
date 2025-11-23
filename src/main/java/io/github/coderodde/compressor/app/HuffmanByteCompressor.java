@@ -12,6 +12,10 @@ import java.util.Objects;
  */
 public final class HuffmanByteCompressor {
     
+    private HuffmanByteCompressor() {
+        
+    }
+    
     /**
      * Compresses the {@code rawData} {@code byte}-array using the input
      * {@code weightDistribution}.
